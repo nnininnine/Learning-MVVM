@@ -8,7 +8,7 @@
 import Foundation
 
 enum Constants {
-    static let demoURL = "https://raw.githubusercontent.com/johncodeos-blog/MVVMiOSExample/demo.json"
+    static let demoURL = "https://raw.githubusercontent.com/johncodeos-blog/MVVMiOSExample/main/demo.json"
 }
 
 enum HTTPHeaderFields {

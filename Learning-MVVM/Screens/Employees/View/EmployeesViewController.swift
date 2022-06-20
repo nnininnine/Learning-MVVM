@@ -11,8 +11,12 @@ import UIKit
 class EmployeesViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
 
+    lazy var viewModel: EmployeesViewModel = .init()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        initVC()
+        initVM()
     }
 
     // MARK: Initial Section
@@ -24,7 +28,16 @@ class EmployeesViewController: UIViewController {
         tableView.dataSource = self
     }
 
-    func initVM() {}
+    func initVM() {
+        viewModel.getEmployees()
+        viewModel.reloadTableView = { [weak self] in
+            DispatchQueue.main.async {
+                if let self = self {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
@@ -32,17 +45,18 @@ class EmployeesViewController: UIViewController {
 extension EmployeesViewController: UITableViewDelegate, UITableViewDataSource {
     // delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
+        return 158
     }
 
     // datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.employeeCellViewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeCell.identifier, for: indexPath) as? EmployeeCell else { fatalError("Xib does not exists.") }
-
+        let cellViewModel = viewModel.getCellViewModel(at: indexPath)
+        cell.cellViewModel = cellViewModel
         return cell
     }
 }

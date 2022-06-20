@@ -26,6 +26,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="LearningMVVM" id="IQL-oL-NoZ"/>
+                    <connections>
+                        <outlet property="tableView" destination="doq-Xs-hfx" id="u6t-ui-73A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VZd-1x-fbR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
